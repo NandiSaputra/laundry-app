@@ -13,7 +13,7 @@ const TransactionHistory = () => {
 
   useEffect(() => {
     dispatch(getBills());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (transactions.length > 0) {
@@ -30,7 +30,9 @@ const TransactionHistory = () => {
       }
     }
   }, [transactions, customerId]);
-
+  const latestTransaction = [...customerTransactions].sort(
+    (a, b) => new Date(b.billDate) - new Date(a.billDate) // Urutkan berdasarkan tanggal terbaru
+  )[0];
   return (
     <View className="flex-1 p-4 bg-[#e6e6fa]">
       <Text className="text-xl font-bold text-[#4169e1]">
@@ -38,7 +40,7 @@ const TransactionHistory = () => {
       </Text>
       {customerTransactions.length > 0 && (
         <Text className="text-[#4169e1] mb-4">
-          {customerTransactions[0].customer.name}
+          {latestTransaction.customer?.name || "Nama tidak tersedia"}
         </Text>
       )}
 

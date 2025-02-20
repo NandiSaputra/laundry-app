@@ -82,7 +82,9 @@ const Product = () => {
         style={{ marginBottom: 61 }}
         showsVerticalScrollIndicator={false}
         data={filteredProducts}
-        keyExtractor={(item) => item.id?.toString()}
+        keyExtractor={(item, index) =>
+          item.id ? String(item.id) : `item-${index}`
+        }
         renderItem={({ item }) => (
           <View className="relative flex-row bg-[#4169e1] mx-5 mt-4  rounded-xl p-4 justify-between items-center">
             <View className="flex-row items-center">

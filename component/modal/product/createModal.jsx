@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "react-native";
+import { Alert, Button } from "react-native";
 import { TextInput } from "react-native";
 import { View } from "react-native";
 import Modal from "react-native-modal";
@@ -13,6 +13,21 @@ const CreateModal = ({ isOpenCreate, setIsOpenCreate }) => {
   const dispatch = useDispatch();
 
   const handleCreate = () => {
+    const trimmedName = name.trim();
+    const trimmedType = type.trim();
+    const priceValue = Number(price);
+
+    // Validasi input kosong
+    if (!trimmedName || !trimmedType) {
+      Alert.alert("Error", "Nama dan Tipe harus diisi.");
+      return;
+    }
+
+    // Validasi harga
+    if (!price || isNaN(priceValue) || priceValue <= 0) {
+      Alert.alert("Error", "Harga harus berupa angka dan lebih dari 0.");
+      return;
+    }
     console.log("Adding product:", { name, price, type });
     dispatch(addProduct({ name, price: Number(price), type }));
     setIsOpenCreate(false);

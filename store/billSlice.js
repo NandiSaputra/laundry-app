@@ -4,9 +4,10 @@ import axiosInstance from "../axios";
 // 🔹 Buat transaksi
 export const createBill = createAsyncThunk(
   "bills/createBill",
-  async (billData, { rejectWithValue }) => {
+  async (billData, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosInstance.post("/bills", billData);
+      dispatch(getBills());
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Gagal membuat transaksi");

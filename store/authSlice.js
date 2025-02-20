@@ -59,7 +59,6 @@ export const loginUser = createAsyncThunk(
         console.log("🔹 Hasil decode:", decoded);
 
         if (!decoded?.role) {
-          console.error("❌ Property 'role' tidak ditemukan!");
           return rejectWithValue("Role tidak ditemukan di token.");
         }
 
@@ -76,7 +75,6 @@ export const loginUser = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      console.error("❌ Error Login:", error);
       return rejectWithValue(error.response?.data || "Login gagal");
     }
   }

@@ -15,6 +15,10 @@ const CreateModal = ({ isOpenCreate, setIsOpenCreate }) => {
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true); // Track phone number validity
 
   const handleCreate = () => {
+    if (!name || !phoneNumber || !address) {
+      Alert.alert("Error", "fields Tidak boleh kosong!");
+      return;
+    }
     dispatch(addCustomers({ name, phoneNumber, address }));
     setIsOpenCreate(false);
     setName("");

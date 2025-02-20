@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../axios";
 import { router } from "expo-router";
+import { getBills } from "./billSlice";
 
 export const getCustomer = createAsyncThunk(
   "customers/getCustomer",
@@ -68,6 +69,7 @@ export const updateCustomers = createAsyncThunk(
         },
       });
       dispatch(getCustomer());
+      dispatch(getBills());
       return response.data;
     } catch (error) {
       console.log(error);

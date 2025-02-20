@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, TextInput, View } from "react-native";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
-import { updateCustomers } from "../../../store/customersSlice";
+import { getCustomer, updateCustomers } from "../../../store/customersSlice";
+import { getBills } from "../../../store/billSlice";
 
 const EditModal = ({ isOpenEdit, setIsOpenEdit, customer }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const EditModal = ({ isOpenEdit, setIsOpenEdit, customer }) => {
       phoneNumber,
       address,
     });
+    dispatch(getCustomer()); // Refresh daftar customer
+    dispatch(getBills()); // Refresh transaksi agar data customer terbaru digunakan
     setIsOpenEdit(false);
   };
 
